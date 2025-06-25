@@ -251,7 +251,7 @@ endif
 #####
 
 # AFL
-fuzz-afl: CC=afl-gcc
+fuzz-afl: CC=afl-clang-fast
 fuzz-afl: FUZZ_FLAGS=-DFUZZING=1
 fuzz-afl: LFLAGS += $(FUZZ_FLAGS)
 fuzz-afl: CFLAGS += $(FUZZ_FLAGS)

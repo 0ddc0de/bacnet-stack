@@ -132,6 +132,15 @@ extern bool Device_Write_Property_Local(BACNET_WRITE_PROPERTY_DATA *wp_data)
     return false;
 }
 
+bool Device_Delete_Object(BACNET_DELETE_OBJECT_DATA *data)
+{
+    return false;
+}
+
+bool Device_Create_Object(BACNET_CREATE_OBJECT_DATA *data){
+    return false;
+}
+
 int LLVMFuzzerTestOneInput(uint8_t *data, size_t size)
 {
     BACNET_ADDRESS src = { 0 };

@@ -14,6 +14,8 @@ TARGET_BIN = ${TARGET}$(TARGET_EXT)
 BACNET_OBJECT_DIR = $(BACNET_SRC_DIR)/bacnet/basic/object
 SRC = main.c \
 	$(BACNET_OBJECT_DIR)/netport.c \
+	$(BACNET_OBJECT_DIR)/bacfile.c \
+	$(BACNET_OBJECT_DIR)/gateway/gw_device.c \
 	$(BACNET_OBJECT_DIR)/client/device-client.c
 
 PORT_MSTP_SRC = \

@@ -18,6 +18,9 @@
 #include "bacnet/bactext.h"
 #include "bacnet/bacerror.h"
 #include "bacnet/iam.h"
+#include "bacnet/list_element.h"
+#include "bacnet/delete_object.h"
+#include "bacnet/create_object.h"
 #include "bacnet/arf.h"
 #include "bacnet/npdu.h"
 #include "bacnet/apdu.h"
@@ -77,25 +80,73 @@ extern int cov_subscribe(void)
 {
     return 0;
 }
+
 extern int Device_Value_List_Supported(void)
 {
     return 0;
 }
+
 extern int Encode_RR_payload(void)
 {
     return 0;
 }
+
 extern int Device_Objects_RR_Info(void)
 {
     return 0;
 }
+
 extern int Device_Write_Property(void)
 {
     return 0;
 }
+
 extern int Device_Reinitialize(void)
 {
     return 0;
+}
+
+extern bool Device_COV(BACNET_OBJECT_TYPE object_type, uint32_t object_instance)
+{
+    return false;
+}
+
+extern void
+Device_COV_Clear(BACNET_OBJECT_TYPE object_type, uint32_t object_instance)
+{
+    return;
+}
+
+extern bool Device_Encode_Value_List(
+    BACNET_OBJECT_TYPE object_type,
+    uint32_t object_instance,
+    BACNET_PROPERTY_VALUE *value_list)
+{
+    return false;
+}
+
+extern int Device_Add_List_Element(BACNET_LIST_ELEMENT_DATA *list_element)
+{
+    return BACNET_STATUS_ERROR;
+}
+
+extern int Device_Remove_List_Element(BACNET_LIST_ELEMENT_DATA *list_element)
+{
+    return BACNET_STATUS_ERROR;
+}
+
+extern bool Device_Write_Property_Local(BACNET_WRITE_PROPERTY_DATA *wp_data)
+{
+    return false;
+}
+
+bool Device_Delete_Object(BACNET_DELETE_OBJECT_DATA *data)
+{
+    return false;
+}
+
+bool Device_Create_Object(BACNET_CREATE_OBJECT_DATA *data){
+    return false;
 }
 
 int main(int argc, char *argv[])
@@ -106,6 +157,11 @@ int main(int argc, char *argv[])
     Init_Service_Handlers();
 
     pdu_len = read(0, &BIP_Rx_Buffer[0], sizeof(BIP_Rx_Buffer));
+
+    if(pdu_len == -1) {
+        perror("read");
+        exit(1);
+    }
 
     /* process fuzz input*/
     if (pdu_len) {
