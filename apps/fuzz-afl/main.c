@@ -1265,6 +1265,10 @@ int main(int argc, char *argv[])
 
     Init_Service_Handlers();
 
+#ifdef __AFL_HAVE_MANUAL_CONTROL
+  __AFL_INIT();
+#endif
+
     pdu_len = read(0, &BIP_Rx_Buffer[0], sizeof(BIP_Rx_Buffer));
 
     if(pdu_len == -1) {
