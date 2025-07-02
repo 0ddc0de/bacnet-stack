@@ -251,11 +251,12 @@ endif
 #####
 
 # AFL
-fuzz-afl: CC ?= afl-clang-fast
+#
+# Compile the fuzz-afl target from the root directory like this:
+# make fuzz-afl -j`nproc` CC=afl-clang-fast AFL_USE_ASAN=1
 fuzz-afl: FUZZ_FLAGS += -DFUZZING=1
 fuzz-afl: LFLAGS += $(FUZZ_FLAGS)
 fuzz-afl: CFLAGS += $(FUZZ_FLAGS)
-fuzz-afl: export AFL_USE_ASAN=1
 
 # LIBFUZZER
 fuzz-libfuzzer: CC=clang
